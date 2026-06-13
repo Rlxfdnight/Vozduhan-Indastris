@@ -539,8 +539,10 @@
 
         .contact-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 4rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .contact-info h3 {
@@ -569,6 +571,7 @@
             justify-content: center;
             width: 50px;
             height: 50px;
+            flex-shrink: 0;
             transition: var(--transition);
         }
 
@@ -579,62 +582,6 @@
 
         .contact-detail div { font-size: 1rem; line-height: 1.7; }
         .contact-detail strong { color: var(--primary); font-size: 1.1rem; transition: var(--transition); }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            background: var(--bg-light);
-            padding: 2.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .contact-form h3 {
-            color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            transition: var(--transition);
-        }
-
-        .contact-form input, .contact-form textarea {
-            padding: 1rem;
-            border: 2px solid var(--input-border);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition);
-            background: var(--card-bg);
-            color: var(--text-dark);
-        }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.15);
-        }
-
-        .contact-form button {
-            background: var(--accent);
-            color: white;
-            padding: 1.1rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-            transition: var(--transition);
-        }
-
-        .contact-form button:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(255, 107, 107, 0.4);
-        }
 
         footer {
             background: #0f2347;
@@ -740,7 +687,7 @@
         }
 
         @media (max-width: 992px) {
-            .about-content, .contact-content { grid-template-columns: 1fr; gap: 3rem; }
+            .about-content { grid-template-columns: 1fr; gap: 3rem; }
             .about-image { max-width: 600px; margin: 0 auto; }
         }
 
@@ -1022,14 +969,6 @@
                     <div><strong>Режим работы:</strong><br>Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходной (гоняем воздух дома)</div>
                 </div>
             </div>
-            <form class="contact-form" id="contact-form">
-                <h3>Отправить заявку</h3>
-                <input type="text" id="form-name" placeholder="Ваше имя" required>
-                <input type="email" id="form-email" placeholder="Ваш email" required>
-                <input type="tel" id="form-phone" placeholder="Телефон">
-                <textarea id="form-message" rows="5" placeholder="Сообщение или тема инфоповода" required></textarea>
-                <button type="submit">Отправить заявку</button>
-            </form>
         </div>
     </section>
 
@@ -1140,26 +1079,19 @@
             }, 200);
         });
 
-        // Отправка формы
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('form-name').value;
-            showToast(`Спасибо, ${name}! Ваша заявка отправлена. Главный воздухан уже готовит вентиляторы.`, "💨");
-            this.reset();
-        });
-
         // ============================================
-        // 🎵 УПРАВЛЕНИЕ МУЗЫКОЙ (ИСПРАВЛЕННОЕ: 1 КЛИК)
+        // 🎵 УПРАВЛЕНИЕ МУЗЫКОЙ
+        // При каждой загрузке страницы — кнопка в начальном положении (выключена)
         // ============================================
         const bgMusic = document.getElementById('bg-music');
         const musicToggle = document.getElementById('music-toggle');
         const musicIcon = musicToggle.querySelector('.music-icon');
         const muteIcon = musicToggle.querySelector('.mute-icon');
 
-        // Проверяем, была ли музыка включена ранее, но НЕ запускаем автоплей при загрузке
-        let isPlaying = localStorage.getItem('musicEnabled') === 'true';
+        // Всегда начинаем с выключенной музыки
+        let isPlaying = false;
 
-        bgMusic.volume = 0.3; // Громкость 30%
+        bgMusic.volume = 0.3;
 
         function updateMusicUI(playing) {
             if (playing) {
@@ -1175,17 +1107,15 @@
             }
         }
 
-        // Инициализируем иконки при загрузке (но не играем)
-        updateMusicUI(isPlaying);
+        // Инициализация: всегда выключено
+        updateMusicUI(false);
 
-        // Обработчик ОДНОГО клика
+        // Обработчик клика
         musicToggle.addEventListener('click', async () => {
             if (!isPlaying) {
-                // Пытаемся включить
                 try {
-                    await bgMusic.play(); // Этот вызов разрешен, так как он внутри обработчика клика!
+                    await bgMusic.play();
                     isPlaying = true;
-                    localStorage.setItem('musicEnabled', 'true');
                     updateMusicUI(true);
                     showToast("🎵 Музыка включена", "🎧");
                 } catch (error) {
@@ -1193,10 +1123,8 @@
                     showToast("Не удалось включить музыку (проверьте файл assets/music.mp3)", "⚠️");
                 }
             } else {
-                // Выключаем
                 bgMusic.pause();
                 isPlaying = false;
-                localStorage.setItem('musicEnabled', 'false');
                 updateMusicUI(false);
                 showToast("🔇 Музыка выключена", "🎧");
             }
