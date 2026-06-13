@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Воздухан Индастрис - Промышленные решения для полнейшего воздуханства</title>
+    <style>
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #ff6b6b;
+            --accent-hover: #ff5252;
+            --bg-body: #ffffff;
+            --bg-light: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --input-border: #e2e8f0;
+            --glass: rgba(255, 255, 255, 0.08);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 20px rgba(30, 60, 114, 0.05);
+            --shadow-lg: 0 20px 40px rgba(30, 60, 114, 0.12);
+            --radius: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.dark-mode {
+            --primary: #63b3ed;
+            --secondary: #4299e1;
+            --bg-body: #0f172a;
+            --bg-light: #1e293b;
+            --card-bg: #1e293b;
+            --text-dark: #f1f5f9;
+            --text-light: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --input-border: #334155;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-body);
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        nav {
+            background: rgba(30, 60, 114, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        body.dark-mode nav {
+            background: rgba(15, 23, 42, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            animation: pulse 2s infinite;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 550;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.25rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        body.dark-mode .sun-icon { display: block; }
+        body.dark-mode .moon-icon { display: none; }
+        body:not(.dark-mode) .sun-icon { display: none; }
+        body:not(.dark-mode) .moon-icon { display: block; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+        .hero {
+            margin-top: 0;
+            padding-top: 10rem;
+            padding-bottom: 8rem;
+            background: linear-gradient(rgba(30, 60, 114, 0.85), rgba(42, 82, 152, 0.85)),
+                        url('https://i.pinimg.com/736x/48/2e/07/482e07c7e52f94a9952a4959673d6590.jpg') center/cover;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.85)),
+                        url('https://i.pinimg.com/736x/48/2e/07/482e07c7e52f94a9952a4959673d6590.jpg') center/cover;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, var(--bg-body), transparent);
+            transition: var(--transition);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1.1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            transition: var(--transition);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(255, 107, 107, 0.5);
+            background: var(--accent-hover);
+        }
+
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 3.5rem;
+            color: var(--primary);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 10px;
+            margin: 1rem auto 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .about-image:hover {
+            transform: scale(1.02);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .services-wrapper {
+            background: var(--bg-light);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-icon-container {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem auto;
+            transition: var(--transition);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .service-icon-container svg {
+            width: 38px;
+            height: 38px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon-container {
+            background: var(--accent);
+            color: white;
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .generator-wrapper {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .generator-wrapper {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .generator-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .generator-box h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .generator-box p#air-text {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-dark);
+            min-height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 5rem 2rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .stats {
+            background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: white;
+            letter-spacing: -1px;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .team-photo {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-card:hover .team-photo {
+            transform: scale(1.05);
+        }
+
+        .team-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .team-info h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .team-position {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .team-info p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .locations-wrapper {
+            background: var(--bg-light);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .location-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .location-photo {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .location-card:hover .location-photo {
+            transform: scale(1.03);
+        }
+
+        .location-info {
+            padding: 2rem;
+        }
+
+        .location-info h3 {
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .location-info p {
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .location-info p strong {
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+            transition: var(--transition);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .contact-detail {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+        }
+
+        .contact-detail span {
+            font-size: 1.8rem;
+            background: rgba(42, 82, 152, 0.1);
+            color: var(--primary);
+            padding: 0.75rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .contact-detail span {
+            background: rgba(99, 179, 237, 0.15);
+            color: var(--primary);
+        }
+
+        .contact-detail div {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .contact-detail strong {
+            color: var(--primary);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .contact-form h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            border: 2px solid var(--input-border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--card-bg);
+            color: var(--text-dark);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.15);
+        }
+
+        .contact-form button {
+            background: var(--accent);
+            color: white;
+            padding: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+            transition: var(--transition);
+        }
+
+        .contact-form button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255, 107, 107, 0.4);
+        }
+
+        footer {
+            background: #0f2347;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 5px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        body.dark-mode footer {
+            background: #090d16;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        footer p:first-child {
+            font-weight: bold;
+            opacity: 1;
+            font-size: 1.1rem;
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: #2d3748;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: auto;
+            border-left: 5px solid #48bb78;
+        }
+
+        body.dark-mode .toast {
+            background: #1e293b;
+            color: #f8fafc;
+            border-left: 5px solid #63b3ed;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            font-size: 1.4rem;
+        }
+
+        /* Кнопка управления музыкой */
+        .music-toggle-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        .music-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent-hover);
+        }
+
+        .music-toggle-btn.playing {
+            animation: music-rotate 4s linear infinite;
+        }
+
+        @keyframes music-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .music-toggle-btn {
+                bottom: 20px;
+                left: 20px;
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .about-image {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.25rem 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 320px;
+                height: 100vh;
+                background: #1e3c72;
+                flex-direction: column;
+                justify-content: center;
+                gap: 2.5rem;
+                padding: 2rem;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            body.dark-mode .nav-links {
+                background: #0f172a;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+
+            .hero p {
+                font-size: 1.15rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Кнопка управления музыкой -->
+    <button id="music-toggle" class="music-toggle-btn" aria-label="Включить музыку" title="Включить музыку">
+        <svg class="music-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <svg class="mute-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+    </button>
+
+    <!-- Скрытый аудио-плеер -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/music.mp3" type="audio/mpeg">
+        <source src="assets/music.ogg" type="audio/ogg">
+    </audio>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo"><span>⚡</span> Воздухан Индастрис</a>
+            <div class="nav-controls">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#about">О компании</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#team">Команда</a></li>
+                    <li><a href="#locations">Объекты</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Сменить тему оформления">
+                    <svg class="sun-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="menu-toggle" id="mobile-menu-btn" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Воздухан Индастрис</h1>
+        <p>Инновационные комплексные решения для промышленного воздуханства и вентиляции смыслов</p>
+        <a href="#contact" class="cta-button">Связаться с нами</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">О компании</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p><strong>Воздухан Индастрис</strong> — ведущая промышленно-развлекательная корпорация, специализирующаяся на генерации, дистрибуции и прогреве медийного воздуха на стриминг-платформах, в социальных сетях и прямых трансляциях.</p>
+                <p>С 2010 года мы предоставляем комплексные решения для качественного прогона воздушных потоков: от вирусных рекомендаций в TikTok до высокотехнологичного и масштабного контента на YouTube и Twitch. Наше экспертное мнение обеспечивает плотность воздуха до 99.97% и полностью сертифицировано по регламентам условного "ООО Воздух".</p>
+                <p>Мы гордимся своей командой из более чем 500 профессиональных воздуханов и 42 производственными площадками по всей стране, где рождаются лучшие тренды интернета.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://i.pinimg.com/736x/1b/85/7b/1b857b052755c83c4171fe6e542f9c39.jpg" alt="Производство Воздухан Индастрис">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <div class="services-wrapper">
+        <section id="services">
+            <h2 class="section-title">Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 20h20"></path>
+                            <path d="M5 17V11l5-3v9"></path>
+                            <path d="M10 17V8l5-3v12"></path>
+                            <path d="M15 17V4l5-2v15"></path>
+                        </svg>
+                    </div>
+                    <h3>Промышленное Воздуханство</h3>
+                    <p>Проектирование и развертывание систем масштабного прогрева воздуха любой сложности. От локальных комментариев до организации миллионных обсуждений.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.59 4.59A2 2 0 1 1 11 8H2"></path>
+                            <path d="M12.59 19.41A2 2 0 1 0 14 16H2"></path>
+                            <path d="M15.73 11.73a4 4 0 1 0-2.82-6.89M21 12H2"></path>
+                        </svg>
+                    </div>
+                    <h3>Воздуханство на дому</h3>
+                    <p>Обеспечиваем комфортную концентрацию уютных дискуссий прямо у вас в комментариях. Ваши личные посты всегда будут наполнены лучшим сертифицированным продуктом.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="M12 8v4"></path>
+                            <path d="M12 16h.01"></path>
+                        </svg>
+                    </div>
+                    <h3>Публичное Воздуханство</h3>
+                    <p>Интеграция эффективных систем фильтрации смыслов в публичном пространстве. Поможем высказать авторитетное мнение по любому поводу без лишней ответственности.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Air Generator Widget Section -->
+    <div class="generator-wrapper">
+        <section>
+            <div class="generator-box">
+                <h3>Проверить концентрацию воздуха онлайн</h3>
+                <p id="air-text">"Нажмите кнопку ниже, чтобы сгенерировать эксклюзивный экспертный инсайт прямо сейчас."</p>
+                <button id="air-gen-btn" class="cta-button">Сгенерировать инсайт</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3 data-target="67">0</h3>
+                <p>дней на рынке</p>
+            </div>
+            <div class="stat-item">
+                <h3 data-target="500">0</h3>
+                <p>воздуханов</p>
+            </div>
+            <div class="stat-item">
+                <h3 data-target="1488">0</h3>
+                <p>Реализованных проектов</p>
+            </div>
+            <div class="stat-item">
+                <h3 data-target="42">0</h3>
+                <p>Производственных баз</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <h2 class="section-title">Наши воздуханы</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="https://i.pinimg.com/736x/f5/d0/25/f5d02515210afb38f4dff6c25732044f.jpg" alt="Генеральный воздухан" class="team-photo">
+                <div class="team-info">
+                    <h3>Александр Петрович Воздухан</h3>
+                    <div class="team-position">Генеральный воздухан</div>
+                    <p>20 лет опыта в сфере профессионального воздуханства. Мудрый основатель и идейный вдохновитель корпорации.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="https://i.pinimg.com/736x/c9/e2/28/c9e228af6ce0f063049ae4a78cdd4395.jpg" alt="Технический воздухан" class="team-photo">
+                <div class="team-info">
+                    <h3>Денис Михайлович Воздухан</h3>
+                    <div class="team-position">Технический воздухан</div>
+                    <p>Эксперт в области распределения потоков и циркуляции мнений. Кандидат околонаучных воздушных наук.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="https://i.pinimg.com/736x/7e/68/e2/7e68e2636f254a0c52013328bf43c6b5.jpg" alt="Главный инженер-воздухан" class="team-photo">
+                <div class="team-info">
+                    <h3>Дмитрий Андреевич Воздухан</h3>
+                    <div class="team-position">Главный инженер-воздухан</div>
+                    <p>Курирует весь отдел разработки инновационных методологий разгона и охлаждения трафика в сети.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <div class="locations-wrapper">
+        <section id="locations" class="locations">
+            <h2 class="section-title">Наши объекты</h2>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcs13.pikabu.ru%2Fpost_img%2Fbig%2F2020%2F04%2F21%2F5%2F1587451769131840589.jpg&f=1&nofb=1&ipt=e9a32fdf5d755fb178fb2382a3b3d08e9e52cb40b849e5239df1719d1e1ce2d7" alt="Производственный комплекс Москва" class="location-photo">
+                    <div class="location-info">
+                        <h3>Производственный комплекс «Весело Живём»</h3>
+                        <p><strong>Расположение</strong>г. Москва, Промышленная зона «Жили не Тужили»</p>
+                        <p><strong>Площадь</strong>15 000 м²</p>
+                        <p><strong>Специализация</strong>Синтез высокоплотного концентрированного воздуха и фильтрация критики.</p>
+                        <p><strong>Персонал</strong>150 active сотрудников</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://i.pinimg.com/736x/20/bf/6a/20bf6ad0ee412558917ba0971709f9ee.jpg" alt="Исследовательский центр" class="location-photo">
+                    <div class="location-info">
+                        <h3>🔬 Научно-исследовательский центр</h3>
+                        <p><strong>Расположение</strong>г. Санкт-Петербург, Научный Технопарк</p>
+                        <p><strong>Площадь</strong>3 500 м²</p>
+                        <p><strong>Специализация</strong>Тестирование новейших технологий и усовершенствование воздушных фраз.</p>
+                        <p><strong>Персонал</strong>80 ведущих ученых и теоретиков</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Foffshoreview.eu%2Fwp-content%2Fuploads%2F2021%2F11%2Fblobid1636060620200.jpg&f=1&nofb=1&ipt=e43a670d7b0e9af70b538f2407525b2f2693bc28e04cc3a3573e81ab53ae6c72" alt="Сборочный цех" class="location-photo">
+                    <div class="location-info">
+                        <h3>⚙️ Сборочный цех «Свежесть»</h3>
+                        <p><strong>Расположение</strong>г. Ростов-на-Дону, Индустриальный парк</p>
+                        <p><strong>Площадь</strong>8 000 м²</p>
+                        <p><strong>Специализация</strong>Сборка автоматизированных станций нагнетания хайпа.</p>
+                        <p><strong>Персонал</strong>120 квалифицированных сотрудников</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://i.pinimg.com/736x/d4/78/46/d4784666412a77eea052a8ec131767e2.jpg" alt="Сервисный центр" class="location-photo">
+                    <div class="location-info">
+                        <h3>🔧 Сервисный центр «Синяя Изолента»</h3>
+                        <p><strong>Расположение</strong>г. Екатеринбург, Промзона Урала</p>
+                        <p><strong>Площадь</strong>2 000 м²</p>
+                        <p><strong>Специализация</strong>Экстренный ремонт утерянной репутации, замена изношенных аргументов.</p>
+                        <p><strong>Персонал</strong>45 топовых специалистов</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://i.pinimg.com/736x/18/08/73/18087390e0cb3b47c096c3cd55542fd0.jpg" alt="Логистический центр" class="location-photo">
+                    <div class="location-info">
+                        <h3>📦 Логистический центр</h3>
+                        <p><strong>Расположение</strong>Московская область, г. Подольск</p>
+                        <p><strong>Площадь</strong>12 000 м²</p>
+                        <p><strong>Специализация</strong>Сортировка и быстрая доставка ценных мыслей по регионам.</p>
+                        <p><strong>Персонал</strong>65 сотрудников склада</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://i.pinimg.com/736x/f8/51/4d/f8514da150fef676a0aa6ac1682230b4.jpg" alt="Офис продаж" class="location-photo">
+                    <div class="location-info">
+                        <h3>Главный штаб "Воздухан Индастрис"</h3>
+                        <p><strong>Расположение</strong>г. Москва, Сити Деловой Центр</p>
+                        <p><strong>Площадь</strong>1 500 м²</p>
+                        <p><strong>Специализация</strong>Переговоры на высоком уровне, шоурум сертифицированных облаков.</p>
+                        <p><strong>Персонал</strong>45 креативных менеджеров</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Контакты</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Свяжитесь с нами</h3>
+                <div class="contact-detail">
+                    <span>📍</span>
+                    <div>
+                        <strong>Адрес головного офиса:</strong><br>
+                        г. Москва, Промышленная улица, 11<br>
+                        Бизнес-центр «Воздухан», 5 этаж
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <span>📞</span>
+                    <div>
+                        <strong>Телефон:</strong><br>
+                        +7 (495) 789-28-08 (многоканальный)<br>
+                        +7 (800) 555-35-35 (бесплатно по РФ)
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <span>✉️</span>
+                    <div>
+                        <strong>Email:</strong><br>
+                        info@vozdukhan.ru<br>
+                        sales@vozdukhan.ru
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <span>🕐</span>
+                    <div>
+                        <strong>Режим работы:</strong><br>
+                        Пн-Пт: 9:00 - 18:00<br>
+                        Сб-Вс: выходной (гоняем воздух дома)
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contact-form">
+                <h3>Отправить заявку</h3>
+                <input type="text" id="form-name" placeholder="Ваше имя" required>
+                <input type="email" id="form-email" placeholder="Ваш email" required>
+                <input type="tel" id="form-phone" placeholder="Телефон">
+                <textarea id="form-message" rows="5" placeholder="Сообщение или тема инфоповода" required></textarea>
+                <button type="submit">Отправить заявку</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Воздухан Индастрис. Все права защищены.</p>
+        <p>ИНН: 6769148842 | ОГРН: 1467524215467 | Лицензия на продукт №42-ВОЗДУХ</p>
+    </footer>
+
+    <script>
+        // Custom Toast System
+        function showToast(message, icon = '🚀', duration = 4000) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<span class="toast-icon">${icon}</span> <span>${message}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.remove();
+                }, 400);
+            }, duration);
+        }
+
+        // Логика Темной Темы
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                showToast("Включена тёмная тема", "🌙");
+            } else {
+                localStorage.setItem('theme', 'light');
+                showToast("Включена светлая тема", "☀️");
+            }
+        });
+
+        // Мобильное меню
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Анимация цифр
+        const statsSection = document.querySelector('.stats');
+        const counters = document.querySelectorAll('.stat-item h3');
+        const speed = 120;
+
+        const animateCounters = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target'), 10);
+                        let current = 0;
+                        const increment = Math.ceil(target / speed);
+
+                        const updateCount = () => {
+                            if (current < target) {
+                                current += increment;
+                                if (current > target) current = target;
+                                counter.innerText = current;
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCount();
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const statsObserver = new IntersectionObserver(animateCounters, {
+            threshold: 0.3
+        });
+        if(statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Генератор воздуха
+        const quotes = [
+            "Каждый кубометр нашего воздуха содержит 99% чистой синергии и харизмы.",
+            "Эффективность наших прогревов доказана ведущими диванными экспертами.",
+            "Если долго и упорно гнать воздух, он неизбежно превратится в монетизируемый трафик.",
+            "Наш девиз: Минимизируем полезные действия ради максимизации атмосферного давления!",
+            "Инновационный медиа-продув — это не про слова, это про правильные колебания эфира.",
+            "Мы не просто сотрясаем воздух, мы делаем это по строго сертифицированному ГОСТу.",
+            "Вектор стратегического развития Воздухан Индастрис — тотальная вентиляция застоявшихся смыслов."
+        ];
+
+        const airGenBtn = document.getElementById('air-gen-btn');
+        const airText = document.getElementById('air-text');
+
+        airGenBtn.addEventListener('click', () => {
+            airText.style.opacity = '0';
+            setTimeout(() => {
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                airText.innerText = `"${randomQuote}"`;
+                airText.style.opacity = '1';
+                showToast("Плотность воздуха оптимальна!", "🌬️");
+            }, 200);
+        });
+
+        // Отправка формы
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('form-name').value;
+            showToast(`Спасибо, ${name}! Ваша заявка отправлена. Главный воздухан уже готовит вентиляторы.`, "💨");
+            this.reset();
+        });
+
+        // ============================================
+        // УПРАВЛЕНИЕ ФОНОВОЙ МУЗЫКОЙ
+        // ============================================
+        const bgMusic = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const musicIcon = musicToggle.querySelector('.music-icon');
+        const muteIcon = musicToggle.querySelector('.mute-icon');
+
+        // Восстановление состояния из localStorage
+        const musicState = localStorage.getItem('musicEnabled');
+        let isPlaying = musicState === 'true';
+
+        bgMusic.volume = 0.3; // Громкость 30%
+
+        function updateMusicUI() {
+            if (isPlaying) {
+                musicIcon.style.display = 'none';
+                muteIcon.style.display = 'block';
+                musicToggle.classList.add('playing');
+                musicToggle.title = 'Выключить музыку';
+                bgMusic.play().catch(e => console.log('Autoplay заблокирован:', e));
+            } else {
+                musicIcon.style.display = 'block';
+                muteIcon.style.display = 'none';
+                musicToggle.classList.remove('playing');
+                musicToggle.title = 'Включить музыку';
+                bgMusic.pause();
+            }
+        }
+
+        musicToggle.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            localStorage.setItem('musicEnabled', isPlaying);
+            updateMusicUI();
+            showToast(isPlaying ? "🎵 Музыка включена" : "🔇 Музыка выключена", "🎧");
+        });
+
+        // Обход политики браузеров: запуск музыки при первом клике
+        function tryAutoplay() {
+            if (isPlaying && bgMusic.paused) {
+                bgMusic.play().catch(() => {});
+            }
+            document.removeEventListener('click', tryAutoplay);
+            document.removeEventListener('keydown', tryAutoplay);
+        }
+        document.addEventListener('click', tryAutoplay);
+        document.addEventListener('keydown', tryAutoplay);
+
+        updateMusicUI();
+    </script>
+
+</body>
+</html>
