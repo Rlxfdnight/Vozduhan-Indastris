@@ -735,10 +735,16 @@
         </svg>
     </button>
 
-    <!-- Аудио-плеер -->
+    <!-- Аудио-плеер фоновой музыки -->
     <audio id="bg-music" loop preload="auto">
         <source src="assets/music.mp3" type="audio/mpeg">
         <source src="assets/music.ogg" type="audio/ogg">
+    </audio>
+
+    <!-- Звук инсайта -->
+    <audio id="insight-sound" preload="auto">
+        <source src="assets/insight.mp3" type="audio/mpeg">
+        <source src="assets/insight.ogg" type="audio/ogg">
     </audio>
 
     <nav>
@@ -1070,7 +1076,27 @@
         ];
         const airGenBtn = document.getElementById('air-gen-btn');
         const airText = document.getElementById('air-text');
+        const insightSound = document.getElementById('insight-sound');
+
+        // Функция воспроизведения звука инсайта
+        function playInsightSound() {
+            try {
+                insightSound.currentTime = 0; // Сброс к началу, чтобы звук можно было запускать повторно
+                const playPromise = insightSound.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Не удалось воспроизвести звук инсайта:", error);
+                    });
+                }
+            } catch (error) {
+                console.log("Ошибка воспроизведения звука:", error);
+            }
+        }
+
         airGenBtn.addEventListener('click', () => {
+            // Воспроизводим звук при нажатии
+            playInsightSound();
+
             airText.style.opacity = '0';
             setTimeout(() => {
                 airText.innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
