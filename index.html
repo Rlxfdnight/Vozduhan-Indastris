@@ -40,15 +40,8 @@
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -98,22 +91,11 @@
             letter-spacing: -0.5px;
         }
 
-        .logo span {
-            animation: pulse 2s infinite;
-        }
+        .logo span { animation: pulse 2s infinite; }
 
-        .nav-controls {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
+        .nav-controls { display: flex; align-items: center; gap: 1.5rem; }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
+        .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
 
         .nav-links a {
             color: rgba(255, 255, 255, 0.85);
@@ -136,13 +118,8 @@
             transition: var(--transition);
         }
 
-        .nav-links a:hover {
-            color: white;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: white; }
+        .nav-links a:hover::after { width: 100%; }
 
         .theme-toggle-btn {
             background: rgba(255, 255, 255, 0.1);
@@ -260,11 +237,7 @@
             background: var(--accent-hover);
         }
 
-        section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
 
         .section-title {
             text-align: center;
@@ -293,15 +266,8 @@
             align-items: center;
         }
 
-        .about-text {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: var(--text-dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
+        .about-text { font-size: 1.15rem; line-height: 1.8; color: var(--text-dark); }
+        .about-text p { margin-bottom: 1.5rem; }
 
         .about-image {
             border-radius: var(--radius);
@@ -311,15 +277,8 @@
             transition: var(--transition);
         }
 
-        .about-image:hover {
-            transform: scale(1.02);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .about-image:hover { transform: scale(1.02); }
+        .about-image img { width: 100%; height: auto; display: block; }
 
         .services-wrapper {
             background: var(--bg-light);
@@ -363,11 +322,7 @@
             animation: float 4s ease-in-out infinite;
         }
 
-        .service-icon-container svg {
-            width: 38px;
-            height: 38px;
-            transition: var(--transition);
-        }
+        .service-icon-container svg { width: 38px; height: 38px; transition: var(--transition); }
 
         .service-card:hover .service-icon-container {
             background: var(--accent);
@@ -384,11 +339,7 @@
             transition: var(--transition);
         }
 
-        .service-card p {
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
+        .service-card p { color: var(--text-light); font-size: 1rem; transition: var(--transition); }
 
         .generator-wrapper {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -499,14 +450,9 @@
             transition: var(--transition);
         }
 
-        .team-card:hover .team-photo {
-            transform: scale(1.05);
-        }
+        .team-card:hover .team-photo { transform: scale(1.05); }
 
-        .team-info {
-            padding: 2rem;
-            text-align: center;
-        }
+        .team-info { padding: 2rem; text-align: center; }
 
         .team-info h3 {
             color: var(--primary);
@@ -525,11 +471,7 @@
             margin-bottom: 1rem;
         }
 
-        .team-info p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
+        .team-info p { color: var(--text-light); font-size: 0.95rem; transition: var(--transition); }
 
         .locations-wrapper {
             background: var(--bg-light);
@@ -565,13 +507,9 @@
             transition: var(--transition);
         }
 
-        .location-card:hover .location-photo {
-            transform: scale(1.03);
-        }
+        .location-card:hover .location-photo { transform: scale(1.03); }
 
-        .location-info {
-            padding: 2rem;
-        }
+        .location-info { padding: 2rem; }
 
         .location-info h3 {
             color: var(--primary);
@@ -639,16 +577,8 @@
             color: var(--primary);
         }
 
-        .contact-detail div {
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        .contact-detail strong {
-            color: var(--primary);
-            font-size: 1.1rem;
-            transition: var(--transition);
-        }
+        .contact-detail div { font-size: 1rem; line-height: 1.7; }
+        .contact-detail strong { color: var(--primary); font-size: 1.1rem; transition: var(--transition); }
 
         .contact-form {
             display: flex;
@@ -670,8 +600,7 @@
             transition: var(--transition);
         }
 
-        .contact-form input,
-        .contact-form textarea {
+        .contact-form input, .contact-form textarea {
             padding: 1rem;
             border: 2px solid var(--input-border);
             border-radius: 8px;
@@ -682,8 +611,7 @@
             color: var(--text-dark);
         }
 
-        .contact-form input:focus,
-        .contact-form textarea:focus {
+        .contact-form input:focus, .contact-form textarea:focus {
             outline: none;
             border-color: var(--secondary);
             box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.15);
@@ -717,21 +645,9 @@
             transition: var(--transition);
         }
 
-        body.dark-mode footer {
-            background: #090d16;
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            opacity: 0.8;
-        }
-
-        footer p:first-child {
-            font-weight: bold;
-            opacity: 1;
-            font-size: 1.1rem;
-        }
+        body.dark-mode footer { background: #090d16; }
+        footer p { margin-bottom: 0.5rem; font-size: 0.95rem; opacity: 0.8; }
+        footer p:first-child { font-weight: bold; opacity: 1; font-size: 1.1rem; }
 
         .toast-container {
             position: fixed;
@@ -765,14 +681,8 @@
             border-left: 5px solid #63b3ed;
         }
 
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast-icon {
-            font-size: 1.4rem;
-        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast-icon { font-size: 1.4rem; }
 
         /* Кнопка управления музыкой */
         .music-toggle-btn {
@@ -809,23 +719,12 @@
         }
 
         @media (max-width: 768px) {
-            .music-toggle-btn {
-                bottom: 20px;
-                left: 20px;
-                width: 48px;
-                height: 48px;
-            }
+            .music-toggle-btn { bottom: 20px; left: 20px; width: 48px; height: 48px; }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes pulse {
@@ -841,26 +740,13 @@
         }
 
         @media (max-width: 992px) {
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            .about-image {
-                max-width: 600px;
-                margin: 0 auto;
-            }
+            .about-content, .contact-content { grid-template-columns: 1fr; gap: 3rem; }
+            .about-image { max-width: 600px; margin: 0 auto; }
         }
 
         @media (max-width: 768px) {
-            nav {
-                padding: 1.25rem 0;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
+            nav { padding: 1.25rem 0; }
+            .menu-toggle { display: flex; }
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -876,32 +762,16 @@
                 box-shadow: -10px 0 30px rgba(0,0,0,0.2);
                 transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             }
-
-            body.dark-mode .nav-links {
-                background: #0f172a;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .hero h1 {
-                font-size: 2.6rem;
-            }
-
-            .hero p {
-                font-size: 1.15rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
+            body.dark-mode .nav-links { background: #0f172a; }
+            .nav-links.active { right: 0; }
+            .hero h1 { font-size: 2.6rem; }
+            .hero p { font-size: 1.15rem; }
+            .section-title { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Notification Container -->
     <div class="toast-container" id="toast-container"></div>
 
     <!-- Кнопка управления музыкой -->
@@ -918,13 +788,12 @@
         </svg>
     </button>
 
-    <!-- Скрытый аудио-плеер -->
+    <!-- Аудио-плеер -->
     <audio id="bg-music" loop preload="auto">
         <source src="assets/music.mp3" type="audio/mpeg">
         <source src="assets/music.ogg" type="audio/ogg">
     </audio>
 
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <a href="#" class="logo"><span>⚡</span> Воздухан Индастрис</a>
@@ -953,22 +822,18 @@
                     </svg>
                 </button>
                 <button class="menu-toggle" id="mobile-menu-btn" aria-label="Открыть меню">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <h1>Воздухан Индастрис</h1>
         <p>Инновационные комплексные решения для промышленного воздуханства и вентиляции смыслов</p>
         <a href="#contact" class="cta-button">Связаться с нами</a>
     </section>
 
-    <!-- About Section -->
     <section id="about">
         <h2 class="section-title">О компании</h2>
         <div class="about-content">
@@ -983,7 +848,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <div class="services-wrapper">
         <section id="services">
             <h2 class="section-title">Наши услуги</h2>
@@ -991,10 +855,7 @@
                 <div class="service-card">
                     <div class="service-icon-container">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 20h20"></path>
-                            <path d="M5 17V11l5-3v9"></path>
-                            <path d="M10 17V8l5-3v12"></path>
-                            <path d="M15 17V4l5-2v15"></path>
+                            <path d="M2 20h20"></path><path d="M5 17V11l5-3v9"></path><path d="M10 17V8l5-3v12"></path><path d="M15 17V4l5-2v15"></path>
                         </svg>
                     </div>
                     <h3>Промышленное Воздуханство</h3>
@@ -1003,9 +864,7 @@
                 <div class="service-card">
                     <div class="service-icon-container">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9.59 4.59A2 2 0 1 1 11 8H2"></path>
-                            <path d="M12.59 19.41A2 2 0 1 0 14 16H2"></path>
-                            <path d="M15.73 11.73a4 4 0 1 0-2.82-6.89M21 12H2"></path>
+                            <path d="M9.59 4.59A2 2 0 1 1 11 8H2"></path><path d="M12.59 19.41A2 2 0 1 0 14 16H2"></path><path d="M15.73 11.73a4 4 0 1 0-2.82-6.89M21 12H2"></path>
                         </svg>
                     </div>
                     <h3>Воздуханство на дому</h3>
@@ -1014,9 +873,7 @@
                 <div class="service-card">
                     <div class="service-icon-container">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                            <path d="M12 8v4"></path>
-                            <path d="M12 16h.01"></path>
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path>
                         </svg>
                     </div>
                     <h3>Публичное Воздуханство</h3>
@@ -1026,7 +883,6 @@
         </section>
     </div>
 
-    <!-- Air Generator Widget Section -->
     <div class="generator-wrapper">
         <section>
             <div class="generator-box">
@@ -1037,29 +893,15 @@
         </section>
     </div>
 
-    <!-- Stats Section -->
     <section class="stats">
         <div class="stats-grid">
-            <div class="stat-item">
-                <h3 data-target="67">0</h3>
-                <p>дней на рынке</p>
-            </div>
-            <div class="stat-item">
-                <h3 data-target="500">0</h3>
-                <p>воздуханов</p>
-            </div>
-            <div class="stat-item">
-                <h3 data-target="1488">0</h3>
-                <p>Реализованных проектов</p>
-            </div>
-            <div class="stat-item">
-                <h3 data-target="42">0</h3>
-                <p>Производственных баз</p>
-            </div>
+            <div class="stat-item"><h3 data-target="67">0</h3><p>дней на рынке</p></div>
+            <div class="stat-item"><h3 data-target="500">0</h3><p>воздуханов</p></div>
+            <div class="stat-item"><h3 data-target="1488">0</h3><p>Реализованных проектов</p></div>
+            <div class="stat-item"><h3 data-target="42">0</h3><p>Производственных баз</p></div>
         </div>
     </section>
 
-    <!-- Team Section -->
     <section id="team">
         <h2 class="section-title">Наши воздуханы</h2>
         <div class="team-grid">
@@ -1090,7 +932,6 @@
         </div>
     </section>
 
-    <!-- Locations Section -->
     <div class="locations-wrapper">
         <section id="locations" class="locations">
             <h2 class="section-title">Наши объекты</h2>
@@ -1159,7 +1000,6 @@
         </section>
     </div>
 
-    <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Контакты</h2>
         <div class="contact-content">
@@ -1167,35 +1007,19 @@
                 <h3>Свяжитесь с нами</h3>
                 <div class="contact-detail">
                     <span>📍</span>
-                    <div>
-                        <strong>Адрес головного офиса:</strong><br>
-                        г. Москва, Промышленная улица, 11<br>
-                        Бизнес-центр «Воздухан», 5 этаж
-                    </div>
+                    <div><strong>Адрес головного офиса:</strong><br>г. Москва, Промышленная улица, 11<br>Бизнес-центр «Воздухан», 5 этаж</div>
                 </div>
                 <div class="contact-detail">
                     <span>📞</span>
-                    <div>
-                        <strong>Телефон:</strong><br>
-                        +7 (495) 789-28-08 (многоканальный)<br>
-                        +7 (800) 555-35-35 (бесплатно по РФ)
-                    </div>
+                    <div><strong>Телефон:</strong><br>+7 (495) 789-28-08 (многоканальный)<br>+7 (800) 555-35-35 (бесплатно по РФ)</div>
                 </div>
                 <div class="contact-detail">
                     <span>✉️</span>
-                    <div>
-                        <strong>Email:</strong><br>
-                        info@vozdukhan.ru<br>
-                        sales@vozdukhan.ru
-                    </div>
+                    <div><strong>Email:</strong><br>info@vozdukhan.ru<br>sales@vozdukhan.ru</div>
                 </div>
                 <div class="contact-detail">
                     <span>🕐</span>
-                    <div>
-                        <strong>Режим работы:</strong><br>
-                        Пн-Пт: 9:00 - 18:00<br>
-                        Сб-Вс: выходной (гоняем воздух дома)
-                    </div>
+                    <div><strong>Режим работы:</strong><br>Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходной (гоняем воздух дома)</div>
                 </div>
             </div>
             <form class="contact-form" id="contact-form">
@@ -1209,64 +1033,44 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Воздухан Индастрис. Все права защищены.</p>
         <p>ИНН: 6769148842 | ОГРН: 1467524215467 | Лицензия на продукт №42-ВОЗДУХ</p>
     </footer>
 
     <script>
-        // Custom Toast System
+        // Toast System
         function showToast(message, icon = '🚀', duration = 4000) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'toast';
             toast.innerHTML = `<span class="toast-icon">${icon}</span> <span>${message}</span>`;
             container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 10);
-
+            setTimeout(() => toast.classList.add('show'), 10);
             setTimeout(() => {
                 toast.classList.remove('show');
-                setTimeout(() => {
-                    toast.remove();
-                }, 400);
+                setTimeout(() => toast.remove(), 400);
             }, duration);
         }
 
-        // Логика Темной Темы
+        // Темная тема
         const themeToggleBtn = document.getElementById('theme-toggle-btn');
-
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
-
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+        
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-                showToast("Включена тёмная тема", "🌙");
-            } else {
-                localStorage.setItem('theme', 'light');
-                showToast("Включена светлая тема", "☀️");
-            }
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            showToast(isDark ? "Включена тёмная тема" : "Включена светлая тема", isDark ? "🌙" : "☀️");
         });
 
         // Мобильное меню
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.getElementById('nav-links');
-
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenuBtn.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
-
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuBtn.classList.remove('active');
@@ -1281,11 +1085,7 @@
                 const targetId = this.getAttribute('href');
                 if(targetId === '#') return;
                 const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+                if(targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
             });
         });
 
@@ -1293,7 +1093,6 @@
         const statsSection = document.querySelector('.stats');
         const counters = document.querySelectorAll('.stat-item h3');
         const speed = 120;
-
         const animateCounters = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1301,7 +1100,6 @@
                         const target = parseInt(counter.getAttribute('data-target'), 10);
                         let current = 0;
                         const increment = Math.ceil(target / speed);
-
                         const updateCount = () => {
                             if (current < target) {
                                 current += increment;
@@ -1318,13 +1116,8 @@
                 }
             });
         };
-
-        const statsObserver = new IntersectionObserver(animateCounters, {
-            threshold: 0.3
-        });
-        if(statsSection) {
-            statsObserver.observe(statsSection);
-        }
+        const statsObserver = new IntersectionObserver(animateCounters, { threshold: 0.3 });
+        if(statsSection) statsObserver.observe(statsSection);
 
         // Генератор воздуха
         const quotes = [
@@ -1336,23 +1129,19 @@
             "Мы не просто сотрясаем воздух, мы делаем это по строго сертифицированному ГОСТу.",
             "Вектор стратегического развития Воздухан Индастрис — тотальная вентиляция застоявшихся смыслов."
         ];
-
         const airGenBtn = document.getElementById('air-gen-btn');
         const airText = document.getElementById('air-text');
-
         airGenBtn.addEventListener('click', () => {
             airText.style.opacity = '0';
             setTimeout(() => {
-                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                airText.innerText = `"${randomQuote}"`;
+                airText.innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
                 airText.style.opacity = '1';
                 showToast("Плотность воздуха оптимальна!", "🌬️");
             }, 200);
         });
 
         // Отправка формы
-        const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', function(e) {
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('form-name').value;
             showToast(`Спасибо, ${name}! Ваша заявка отправлена. Главный воздухан уже готовит вентиляторы.`, "💨");
@@ -1360,55 +1149,58 @@
         });
 
         // ============================================
-        // УПРАВЛЕНИЕ ФОНОВОЙ МУЗЫКОЙ
+        // 🎵 УПРАВЛЕНИЕ МУЗЫКОЙ (ИСПРАВЛЕННОЕ: 1 КЛИК)
         // ============================================
         const bgMusic = document.getElementById('bg-music');
         const musicToggle = document.getElementById('music-toggle');
         const musicIcon = musicToggle.querySelector('.music-icon');
         const muteIcon = musicToggle.querySelector('.mute-icon');
 
-        // Восстановление состояния из localStorage
-        const musicState = localStorage.getItem('musicEnabled');
-        let isPlaying = musicState === 'true';
+        // Проверяем, была ли музыка включена ранее, но НЕ запускаем автоплей при загрузке
+        let isPlaying = localStorage.getItem('musicEnabled') === 'true';
 
         bgMusic.volume = 0.3; // Громкость 30%
 
-        function updateMusicUI() {
-            if (isPlaying) {
+        function updateMusicUI(playing) {
+            if (playing) {
                 musicIcon.style.display = 'none';
                 muteIcon.style.display = 'block';
                 musicToggle.classList.add('playing');
                 musicToggle.title = 'Выключить музыку';
-                bgMusic.play().catch(e => console.log('Autoplay заблокирован:', e));
             } else {
                 musicIcon.style.display = 'block';
                 muteIcon.style.display = 'none';
                 musicToggle.classList.remove('playing');
                 musicToggle.title = 'Включить музыку';
+            }
+        }
+
+        // Инициализируем иконки при загрузке (но не играем)
+        updateMusicUI(isPlaying);
+
+        // Обработчик ОДНОГО клика
+        musicToggle.addEventListener('click', async () => {
+            if (!isPlaying) {
+                // Пытаемся включить
+                try {
+                    await bgMusic.play(); // Этот вызов разрешен, так как он внутри обработчика клика!
+                    isPlaying = true;
+                    localStorage.setItem('musicEnabled', 'true');
+                    updateMusicUI(true);
+                    showToast("🎵 Музыка включена", "🎧");
+                } catch (error) {
+                    console.error("Ошибка воспроизведения:", error);
+                    showToast("Не удалось включить музыку (проверьте файл assets/music.mp3)", "⚠️");
+                }
+            } else {
+                // Выключаем
                 bgMusic.pause();
+                isPlaying = false;
+                localStorage.setItem('musicEnabled', 'false');
+                updateMusicUI(false);
+                showToast("🔇 Музыка выключена", "🎧");
             }
-        }
-
-        musicToggle.addEventListener('click', () => {
-            isPlaying = !isPlaying;
-            localStorage.setItem('musicEnabled', isPlaying);
-            updateMusicUI();
-            showToast(isPlaying ? "🎵 Музыка включена" : "🔇 Музыка выключена", "🎧");
         });
-
-        // Обход политики браузеров: запуск музыки при первом клике
-        function tryAutoplay() {
-            if (isPlaying && bgMusic.paused) {
-                bgMusic.play().catch(() => {});
-            }
-            document.removeEventListener('click', tryAutoplay);
-            document.removeEventListener('keydown', tryAutoplay);
-        }
-        document.addEventListener('click', tryAutoplay);
-        document.addEventListener('keydown', tryAutoplay);
-
-        updateMusicUI();
     </script>
-
 </body>
 </html>
