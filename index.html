@@ -537,12 +537,14 @@
             transition: var(--transition);
         }
 
+        /* ===== ИСПРАВЛЕНИЕ: выравнивание секции "Связаться с нами" ===== */
         .contact-content {
             display: grid;
             grid-template-columns: 1fr;
             gap: 4rem;
             max-width: 700px;
             margin: 0 auto;
+            text-align: center; /* центрируем содержимое */
         }
 
         .contact-info h3 {
@@ -551,13 +553,15 @@
             margin-bottom: 2rem;
             font-weight: 700;
             transition: var(--transition);
+            text-align: center; /* заголовок по центру */
         }
 
         .contact-detail {
             margin-bottom: 2rem;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 1.25rem;
+            justify-content: center; /* выравнивание по центру */
         }
 
         .contact-detail span {
@@ -580,7 +584,11 @@
             color: var(--primary);
         }
 
-        .contact-detail div { font-size: 1rem; line-height: 1.7; }
+        .contact-detail div {
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: left; /* текст внутри блока — по левому краю для читаемости */
+        }
         .contact-detail strong { color: var(--primary); font-size: 1.1rem; transition: var(--transition); }
 
         footer {
@@ -667,6 +675,8 @@
 
         @media (max-width: 768px) {
             .music-toggle-btn { bottom: 20px; left: 20px; width: 48px; height: 48px; }
+            .contact-detail { flex-direction: column; text-align: center; }
+            .contact-detail div { text-align: center; }
         }
 
         @keyframes fadeInUp {
@@ -721,7 +731,6 @@
 
     <div class="toast-container" id="toast-container"></div>
 
-    <!-- Кнопка управления музыкой -->
     <button id="music-toggle" class="music-toggle-btn" aria-label="Включить музыку" title="Включить музыку">
         <svg class="music-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -735,13 +744,11 @@
         </svg>
     </button>
 
-    <!-- Аудио-плеер фоновой музыки -->
     <audio id="bg-music" loop preload="auto">
         <source src="assets/music.mp3" type="audio/mpeg">
         <source src="assets/music.ogg" type="audio/ogg">
     </audio>
 
-    <!-- Звук инсайта -->
     <audio id="insight-sound" preload="auto">
         <source src="assets/insight.mp3" type="audio/mpeg">
         <source src="assets/insight.ogg" type="audio/ogg">
@@ -968,7 +975,7 @@
                 </div>
                 <div class="contact-detail">
                     <span>✉️</span>
-                    <div><strong>Email:</strong><br>info@vozdukhan.ru<br>sales@vozdukhan.ru</div>
+                    <div><strong>Email:</strong><br>infovozduhan@gmail.com<br>salesvozduhan@gmail.com</div>
                 </div>
                 <div class="contact-detail">
                     <span>🕐</span>
@@ -998,7 +1005,6 @@
             }, duration);
         }
 
-        // Темная тема
         const themeToggleBtn = document.getElementById('theme-toggle-btn');
         if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
         
@@ -1009,7 +1015,6 @@
             showToast(isDark ? "Включена тёмная тема" : "Включена светлая тема", isDark ? "🌙" : "☀️");
         });
 
-        // Мобильное меню
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.getElementById('nav-links');
         mobileMenuBtn.addEventListener('click', () => {
@@ -1023,7 +1028,6 @@
             });
         });
 
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1034,7 +1038,6 @@
             });
         });
 
-        // Анимация цифр
         const statsSection = document.querySelector('.stats');
         const counters = document.querySelectorAll('.stat-item h3');
         const speed = 120;
@@ -1064,7 +1067,6 @@
         const statsObserver = new IntersectionObserver(animateCounters, { threshold: 0.3 });
         if(statsSection) statsObserver.observe(statsSection);
 
-        // Генератор воздуха
         const quotes = [
             "Каждый кубометр нашего воздуха содержит 99% чистой синергии и харизмы.",
             "Эффективность наших прогревов доказана ведущими диванными экспертами.",
@@ -1078,10 +1080,9 @@
         const airText = document.getElementById('air-text');
         const insightSound = document.getElementById('insight-sound');
 
-        // Функция воспроизведения звука инсайта
         function playInsightSound() {
             try {
-                insightSound.currentTime = 0; // Сброс к началу, чтобы звук можно было запускать повторно
+                insightSound.currentTime = 0;
                 const playPromise = insightSound.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(error => {
@@ -1094,9 +1095,7 @@
         }
 
         airGenBtn.addEventListener('click', () => {
-            // Воспроизводим звук при нажатии
             playInsightSound();
-
             airText.style.opacity = '0';
             setTimeout(() => {
                 airText.innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
@@ -1105,18 +1104,12 @@
             }, 200);
         });
 
-        // ============================================
-        // 🎵 УПРАВЛЕНИЕ МУЗЫКОЙ
-        // При каждой загрузке страницы — кнопка в начальном положении (выключена)
-        // ============================================
         const bgMusic = document.getElementById('bg-music');
         const musicToggle = document.getElementById('music-toggle');
         const musicIcon = musicToggle.querySelector('.music-icon');
         const muteIcon = musicToggle.querySelector('.mute-icon');
 
-        // Всегда начинаем с выключенной музыки
         let isPlaying = false;
-
         bgMusic.volume = 0.3;
 
         function updateMusicUI(playing) {
@@ -1133,10 +1126,8 @@
             }
         }
 
-        // Инициализация: всегда выключено
         updateMusicUI(false);
 
-        // Обработчик клика
         musicToggle.addEventListener('click', async () => {
             if (!isPlaying) {
                 try {
