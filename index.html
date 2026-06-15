@@ -537,46 +537,67 @@
             transition: var(--transition);
         }
 
-        /* ===== ИСПРАВЛЕНИЕ: выравнивание секции "Связаться с нами" ===== */
+        /* ===== КОНТАКТЫ В РЯДОК ===== */
         .contact-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 4rem;
-            max-width: 700px;
+            max-width: 1200px;
             margin: 0 auto;
-            text-align: center; /* центрируем содержимое */
+            text-align: center;
         }
 
         .contact-info h3 {
             color: var(--primary);
             font-size: 1.8rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             font-weight: 700;
             transition: var(--transition);
-            text-align: center; /* заголовок по центру */
+            text-align: center;
+        }
+
+        /* Сетка из 4 карточек в ряд */
+        .contact-details-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
         }
 
         .contact-detail {
-            margin-bottom: 2rem;
+            background: var(--card-bg);
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 1.25rem;
-            justify-content: center; /* выравнивание по центру */
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .contact-detail:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
         }
 
         .contact-detail span {
-            font-size: 1.8rem;
+            font-size: 2rem;
             background: rgba(42, 82, 152, 0.1);
             color: var(--primary);
-            padding: 0.75rem;
+            padding: 0.9rem;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            flex-shrink: 0;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1.25rem;
             transition: var(--transition);
+        }
+
+        .contact-detail:hover span {
+            background: var(--accent);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
         }
 
         body.dark-mode .contact-detail span {
@@ -584,12 +605,24 @@
             color: var(--primary);
         }
 
-        .contact-detail div {
-            font-size: 1rem;
-            line-height: 1.7;
-            text-align: left; /* текст внутри блока — по левому краю для читаемости */
+        body.dark-mode .contact-detail:hover span {
+            background: var(--accent);
+            color: white;
         }
-        .contact-detail strong { color: var(--primary); font-size: 1.1rem; transition: var(--transition); }
+
+        .contact-detail div {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .contact-detail strong {
+            color: var(--primary);
+            font-size: 1.05rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
 
         footer {
             background: #0f2347;
@@ -673,12 +706,6 @@
             to { transform: rotate(360deg); }
         }
 
-        @media (max-width: 768px) {
-            .music-toggle-btn { bottom: 20px; left: 20px; width: 48px; height: 48px; }
-            .contact-detail { flex-direction: column; text-align: center; }
-            .contact-detail div { text-align: center; }
-        }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
@@ -696,9 +723,11 @@
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
+        /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 992px) {
             .about-content { grid-template-columns: 1fr; gap: 3rem; }
             .about-image { max-width: 600px; margin: 0 auto; }
+            .contact-details-row { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
@@ -724,6 +753,8 @@
             .hero h1 { font-size: 2.6rem; }
             .hero p { font-size: 1.15rem; }
             .section-title { font-size: 2.2rem; }
+            .music-toggle-btn { bottom: 20px; left: 20px; width: 48px; height: 48px; }
+            .contact-details-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -965,21 +996,23 @@
         <div class="contact-content">
             <div class="contact-info">
                 <h3>Свяжитесь с нами</h3>
-                <div class="contact-detail">
-                    <span>📍</span>
-                    <div><strong>Адрес головного офиса:</strong><br>г. Москва, Промышленная улица, 11<br>Бизнес-центр «Воздухан», 5 этаж</div>
-                </div>
-                <div class="contact-detail">
-                    <span>📞</span>
-                    <div><strong>Телефон:</strong><br>+7 (495) 789-28-08 (многоканальный)<br>+7 (800) 555-35-35 (бесплатно по РФ)</div>
-                </div>
-                <div class="contact-detail">
-                    <span>✉️</span>
-                    <div><strong>Email:</strong><br>infovozduhan@gmail.com<br>salesvozduhan@gmail.com</div>
-                </div>
-                <div class="contact-detail">
-                    <span>🕐</span>
-                    <div><strong>Режим работы:</strong><br>Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходной (гоняем воздух дома)</div>
+                <div class="contact-details-row">
+                    <div class="contact-detail">
+                        <span>📍</span>
+                        <div><strong>Адрес</strong>г. Москва, Промышленная улица, 11<br>Бизнес-центр «Воздухан», 5 этаж</div>
+                    </div>
+                    <div class="contact-detail">
+                        <span>📞</span>
+                        <div><strong>Телефон</strong>+7 (495) 789-28-08<br>+7 (800) 555-35-35</div>
+                    </div>
+                    <div class="contact-detail">
+                        <span>✉️</span>
+                        <div><strong>Email</strong>infovozduhan@gmail.com<br>salesvozduhan@gmail.com</div>
+                    </div>
+                    <div class="contact-detail">
+                        <span>🕐</span>
+                        <div><strong>Режим работы</strong>Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходной</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -991,7 +1024,6 @@
     </footer>
 
     <script>
-        // Toast System
         function showToast(message, icon = '🚀', duration = 4000) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
