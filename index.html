@@ -1178,6 +1178,23 @@
                 showToast("🔇 Музыка выключена", "🎧");
             }
         });
+
+        /* ===== АВТОЗАПУСК МУЗЫКИ ПРИ ПЕРВОМ ВЗАИМОДЕЙСТВИИ ===== */
+        let bgStarted = false;
+        function startBgm() {
+            if (bgStarted) return;
+            bgStarted = true;
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                updateMusicUI(true);
+                showToast("🎵 Фоновая музыка запущена", "🎧");
+            }).catch(() => {
+                // Если браузер заблокировал автозапуск — ничего не делаем,
+                // пользователь сможет включить музыку вручную кнопкой
+            });
+        }
+        document.addEventListener('click', startBgm, { once: true });
+        document.addEventListener('keydown', startBgm, { once: true });
     </script>
 </body>
 </html>
