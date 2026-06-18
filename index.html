@@ -473,6 +473,57 @@
 
         .team-info p { color: var(--text-light); font-size: 0.95rem; transition: var(--transition); }
 
+        /* ===== ПАСХАЛКА: FLIP CARD ===== */
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card:hover {
+            transform: none;
+        }
+
+        .flip-card-inner {
+            display: grid;
+            grid-template-areas: "card";
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            grid-area: card;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        body.dark-mode .flip-card-back {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .flip-card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .locations-wrapper {
             background: var(--bg-light);
             border-top: 1px solid var(--border-color);
@@ -904,12 +955,19 @@
                     <p>20 лет опыта в сфере профессионального воздуханства. Мудрый основатель и идейный вдохновитель корпорации.</p>
                 </div>
             </div>
-            <div class="team-card">
-                <img src="https://i.pinimg.com/736x/c9/e2/28/c9e228af6ce0f063049ae4a78cdd4395.jpg" alt="Технический воздухан" class="team-photo">
-                <div class="team-info">
-                    <h3>Денис Михайлович Воздухан</h3>
-                    <div class="team-position">Технический воздухан</div>
-                    <p>Эксперт в области распределения потоков и циркуляции мнений. Кандидат околонаучных воздушных наук.</p>
+            <div class="team-card flip-card" id="tech-vozduhan-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://i.pinimg.com/736x/c9/e2/28/c9e228af6ce0f063049ae4a78cdd4395.jpg" alt="Технический воздухан" class="team-photo">
+                        <div class="team-info">
+                            <h3>Денис Михайлович Воздухан</h3>
+                            <div class="team-position">Технический воздухан</div>
+                            <p>Эксперт в области распределения потоков и циркуляции мнений. Кандидат околонаучных воздушных наук.</p>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="assets/secret.jpg" alt="Пасхалка">
+                    </div>
                 </div>
             </div>
             <div class="team-card">
@@ -1179,22 +1237,13 @@
             }
         });
 
-        /* ===== АВТОЗАПУСК МУЗЫКИ ПРИ ПЕРВОМ ВЗАИМОДЕЙСТВИИ ===== */
-        let bgStarted = false;
-        function startBgm() {
-            if (bgStarted) return;
-            bgStarted = true;
-            bgMusic.play().then(() => {
-                isPlaying = true;
-                updateMusicUI(true);
-                showToast("🎵 Фоновая музыка запущена", "🎧");
-            }).catch(() => {
-                // Если браузер заблокировал автозапуск — ничего не делаем,
-                // пользователь сможет включить музыку вручную кнопкой
+        /* ===== ПАСХАЛКА: ПЕРЕВОРОТ КАРТОЧКИ ТЕХНИЧЕСКОГО ВОЗДУХАНА ===== */
+        const techVozduhanCard = document.getElementById('tech-vozduhan-card');
+        if (techVozduhanCard) {
+            techVozduhanCard.addEventListener('click', () => {
+                techVozduhanCard.classList.toggle('flipped');
             });
         }
-        document.addEventListener('click', startBgm, { once: true });
-        document.addEventListener('keydown', startBgm, { once: true });
     </script>
 </body>
 </html>
