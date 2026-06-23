@@ -752,6 +752,199 @@
             animation: music-rotate 4s linear infinite;
         }
 
+        /* ===== КНОПКА ДИСКЛЕЙМЕРА ===== */
+        .disclaimer-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            z-index: 998;
+            transition: var(--transition);
+            animation: pulse-glow 2s infinite;
+        }
+
+        .disclaimer-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        .disclaimer-btn svg {
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4); }
+            50% { box-shadow: 0 6px 30px rgba(255, 107, 107, 0.7); }
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ДИСКЛЕЙМЕРА ===== */
+        .disclaimer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .disclaimer-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .disclaimer-content {
+            background: var(--card-bg);
+            max-width: 650px;
+            width: 90%;
+            border-radius: var(--radius);
+            padding: 3rem 2.5rem;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--accent);
+            transform: scale(0.8) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .disclaimer-modal.active .disclaimer-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .disclaimer-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: none;
+            border: none;
+            font-size: 2.2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+            line-height: 1;
+        }
+
+        .disclaimer-close:hover {
+            background: var(--bg-light);
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .disclaimer-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .disclaimer-content h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .disclaimer-text {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .disclaimer-text p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .disclaimer-text .highlight {
+            color: var(--accent);
+            font-weight: 700;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .disclaimer-footer {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .disclaimer-accept {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(30, 60, 114, 0.3);
+        }
+
+        .disclaimer-accept:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 60, 114, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .disclaimer-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 0.8rem 1.2rem;
+                font-size: 0.8rem;
+            }
+            .disclaimer-btn span {
+                display: none;
+            }
+            .disclaimer-content {
+                padding: 2rem 1.5rem;
+            }
+            .disclaimer-icon {
+                font-size: 3rem;
+            }
+            .disclaimer-content h3 {
+                font-size: 1.4rem;
+            }
+            .disclaimer-text p {
+                font-size: 0.95rem;
+            }
+        }
+
         @keyframes music-rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -825,6 +1018,33 @@
             <line x1="17" y1="9" x2="23" y2="15"></line>
         </svg>
     </button>
+
+    <!-- Кнопка дисклеймера -->
+    <button id="disclaimer-btn" class="disclaimer-btn" aria-label="Обязательно к ознакомлению" title="Обязательно к ознакомлению">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Обязательно к ознакомлению</span>
+    </button>
+
+    <!-- Плашка дисклеймера -->
+    <div id="disclaimer-modal" class="disclaimer-modal">
+        <div class="disclaimer-content">
+            <button class="disclaimer-close" aria-label="Закрыть">&times;</button>
+            <div class="disclaimer-icon">⚠️</div>
+            <h3>Важное уведомление</h3>
+            <div class="disclaimer-text">
+                <p><strong>Уважаемый посетитель!</strong></p>
+                <p>Сайт <strong>"Воздухан Индастрис"</strong> является <span class="highlight">сугубо шуточным проектом</span> и создан исключительно в развлекательных целях.</p>
+                <p>Все совпадения с реальными компаниями, ФИО лиц и событиями случайны. Любые описанные услуги, продукты и деятельности являются вымышленными и не имеют отношения к реальной коммерческой деятельности.</p>
+                <p>Все картинки, звуки и прочие ресурсы были взяты с открытых источников и не облагаются авторским правом.</p>
+                <p class="disclaimer-footer"><em>С уважением, разработчик сайта RLXFDNIGHT.</em></p>
+            </div>
+            <button class="disclaimer-accept" id="disclaimer-accept">Понял, принимаю!</button>
+        </div>
+    </div>
 
     <audio id="bg-music" loop preload="auto">
         <source src="assets/music.mp3" type="audio/mpeg">
@@ -1244,6 +1464,53 @@
                 techVozduhanCard.classList.toggle('flipped');
             });
         }
+
+        /* ===== ДИСКЛЕЙМЕР ===== */
+        const disclaimerBtn = document.getElementById('disclaimer-btn');
+        const disclaimerModal = document.getElementById('disclaimer-modal');
+        const disclaimerClose = document.querySelector('.disclaimer-close');
+        const disclaimerAccept = document.getElementById('disclaimer-accept');
+
+        // Проверка, показывали ли уже дисклеймер
+        const hasSeenDisclaimer = localStorage.getItem('hasSeenDisclaimer');
+        
+        // Показываем дисклеймер при загрузке, если пользователь ещё не видел его
+        if (!hasSeenDisclaimer) {
+            setTimeout(() => {
+                disclaimerModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }, 1000);
+        }
+
+        // Открытие дисклеймера по кнопке
+        disclaimerBtn.addEventListener('click', () => {
+            disclaimerModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Закрытие дисклеймера
+        function closeDisclaimer() {
+            disclaimerModal.classList.remove('active');
+            document.body.style.overflow = '';
+            localStorage.setItem('hasSeenDisclaimer', 'true');
+        }
+
+        disclaimerClose.addEventListener('click', closeDisclaimer);
+        disclaimerAccept.addEventListener('click', closeDisclaimer);
+
+        // Закрытие по клику вне модального окна
+        disclaimerModal.addEventListener('click', (e) => {
+            if (e.target === disclaimerModal) {
+                closeDisclaimer();
+            }
+        });
+
+        // Закрытие по Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && disclaimerModal.classList.contains('active')) {
+                closeDisclaimer();
+            }
+        });
     </script>
 </body>
 </html>
