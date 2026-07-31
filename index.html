@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Воздухан Индастрис - Промышленные решения для полнейшего воздуханства</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <button id="music-toggle" class="music-toggle-btn" aria-label="Включить музыку" title="Включить музыку">
+        <svg class="music-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <svg class="mute-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+    </button>
+
+    <button id="disclaimer-btn" class="disclaimer-btn" aria-label="Обязательно к ознакомлению" title="Обязательно к ознакомлению">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Обязательно к ознакомлению</span>
+    </button>
+
+    <div id="disclaimer-modal" class="disclaimer-modal">
+        <div class="disclaimer-content">
+            <button class="disclaimer-close" aria-label="Закрыть">&times;</button>
+            <div class="disclaimer-icon">⚠️</div>
+            <h3>Важное уведомление</h3>
+            <div class="disclaimer-text">
+                <p><strong>Уважаемый посетитель!</strong></p>
+                <p>Сайт <strong>"Воздухан Индастрис"</strong> является <span class="highlight">сугубо шуточным проектом</span> и создан исключительно в развлекательных целях.</p>
+                <p>Все совпадения с реальными компаниями, ФИО лиц и событиями случайны. Любые описанные услуги, продукты и деятельности являются вымышленными и не имеют отношения к реальной коммерческой деятельности.</p>
+                <p>Все картинки, звуки и прочие ресурсы были взяты с открытых источников и не облагаются авторским правом.</p>
+                <p class="disclaimer-footer"><em>С уважением, разработчик сайта RLXFDNIGHT.</em></p>
+            </div>
+            <button class="disclaimer-accept" id="disclaimer-accept">Понял, принимаю!</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/music.mp3" type="audio/mpeg">
+        <source src="assets/music.ogg" type="audio/ogg">
+    </audio>
+
+    <audio id="insight-sound" preload="auto">
+        <source src="assets/insight.mp3" type="audio/mpeg">
+        <source src="assets/insight.ogg" type="audio/ogg">
+    </audio>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo"><span>⚡</span> Воздухан Индастрис</a>
+            <div class="nav-controls">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#about">О компании</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#team">Команда</a></li>
+                    <li><a href="#locations">Объекты</a></li>
+                    <li><a href="#partners">Партнёры</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Сменить тему оформления">
+                    <svg class="sun-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="menu-toggle" id="mobile-menu-btn" aria-label="Открыть меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Воздухан Индастрис</h1>
+        <p>Инновационные комплексные решения для промышленного воздуханства и вентиляции смыслов</p>
+        <a href="#contact" class="cta-button">Связаться с нами</a>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">О компании</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p><strong>Воздухан Индастрис</strong> — ведущая промышленно-развлекательная корпорация, специализирующаяся на генерации, дистрибуции и прогреве медийного воздуха на стриминг-платформах, в социальных сетях и прямых трансляциях.</p>
+                <p>С 2010 года мы предоставляем комплексные решения для качественного прогона воздушных потоков: от вирусных рекомендаций в TikTok до высокотехнологичного и масштабного контента на YouTube и Twitch. Наше экспертное мнение обеспечивает плотность воздуха до 99.97% и полностью сертифицировано по регламентам условного "ООО Воздух".</p>
+                <p>Мы гордимся своей командой из более чем 500 профессиональных воздуханов и 42 производственными площадками по всей стране, где рождаются лучшие тренды интернета.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://i.pinimg.com/736x/1b/85/7b/1b857b052755c83c4171fe6e542f9c39.jpg" alt="Производство Воздухан Индастрис">
+            </div>
+        </div>
+    </section>
+
+    <div class="services-wrapper">
+        <section id="services">
+            <h2 class="section-title">Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 20h20"></path><path d="M5 17V11l5-3v9"></path><path d="M10 17V8l5-3v12"></path><path d="M15 17V4l5-2v15"></path>
+                        </svg>
+                    </div>
+                    <h3>Промышленное Воздуханство</h3>
+                    <p>Проектирование и развертывание систем масштабного прогрева воздуха любой сложности. От локальных комментариев до организации миллионных обсуждений.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.59 4.59A2 2 0 1 1 11 8H2"></path><path d="M12.59 19.41A2 2 0 1 0 14 16H2"></path><path d="M15.73 11.73a4 4 0 1 0-2.82-6.89M21 12H2"></path>
+                        </svg>
+                    </div>
+                    <h3>Воздуханство на дому</h3>
+                    <p>Обеспечиваем комфортную концентрацию уютных дискуссий прямо у вас в комментариях. Ваши личные посты всегда будут наполнены лучшим сертифицированным продуктом.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-container">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path>
+                        </svg>
+                    </div>
+                    <h3>Публичное Воздуханство</h3>
+                    <p>Интеграция эффективных систем фильтрации смыслов в публичном пространстве. Поможем высказать авторитетное мнение по любому поводу без лишней ответственности.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="generator-wrapper">
+        <section>
+            <div class="generator-box">
+                <h3>Проверить концентрацию воздуха онлайн</h3>
+                <p id="air-text">"Нажмите кнопку ниже, чтобы сгенерировать эксклюзивный экспертный инсайт прямо сейчас."</p>
+                <button id="air-gen-btn" class="cta-button">Сгенерировать инсайт</button>
+            </div>
+        </section>
+    </div>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item"><h3 data-target="67">0</h3><p>дней на рынке</p></div>
+            <div class="stat-item"><h3 data-target="500">0</h3><p>воздуханов</p></div>
+            <div class="stat-item"><h3 data-target="1488">0</h3><p>Реализованных проектов</p></div>
+            <div class="stat-item"><h3 data-target="42">0</h3><p>Производственных баз</p></div>
+        </div>
+    </section>
+
+    <section id="team">
+        <h2 class="section-title">Наши воздуханы</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="https://i.pinimg.com/736x/f5/d0/25/f5d02515210afb38f4dff6c25732044f.jpg" alt="Генеральный воздухан" class="team-photo">
+                <div class="team-info">
+                    <h3>Александр Петрович Воздухан</h3>
+                    <div class="team-position">Генеральный воздухан</div>
+                    <p>20 лет опыта в сфере профессионального воздуханства. Мудрый основатель и идейный вдохновитель корпорации.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="https://i.pinimg.com/736x/c9/e2/28/c9e228af6ce0f063049ae4a78cdd4395.jpg" alt="Технический воздухан" class="team-photo">
+                <div class="team-info">
+                    <h3>Денис Михайлович Воздухан</h3>
+                    <div class="team-position">Технический воздухан</div>
+                    <p>Эксперт в области распределения потоков и циркуляции мнений. Кандидат околонаучных воздушных наук.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="https://i.pinimg.com/736x/7e/68/e2/7e68e2636f254a0c52013328bf43c6b5.jpg" alt="Главный инженер-воздухан" class="team-photo">
+                <div class="team-info">
+                    <h3>Дмитрий Андреевич Воздухан</h3>
+                    <div class="team-position">Главный инженер-воздухан</div>
+                    <p>Курирует весь отдел разработки инновационных методологий разгона и охлаждения трафика в сети.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="locations-wrapper">
+        <section id="locations" class="locations">
+            <h2 class="section-title">Наши объекты</h2>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcs13.pikabu.ru%2Fpost_img%2Fbig%2F2020%2F04%2F21%2F5%2F1587451769131840589.jpg&f=1&nofb=1&ipt=e9a32fdf5d755fb178fb2382a3b3d08e9e52cb40b849e5239df1719d1e1ce2d7" alt="Производственный комплекс Москва" class="location-photo">
+                    <div class="location-info">
+                        <h3>Производственный комплекс «Весело Живём»</h3>
+                        <p><strong>Расположение</strong>г. Мурино, Промышленная зона «Жили не Тужили»</p>
+                        <p><strong>Площадь</strong>15 000 м²</p>
+                        <p><strong>Специализация</strong>Синтез высокоплотного концентрированного воздуха и фильтрация критики.</p>
+                        <p><strong>Персонал</strong>150 active сотрудников</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://i.pinimg.com/736x/20/bf/6a/20bf6ad0ee412558917ba0971709f9ee.jpg" alt="Исследовательский центр" class="location-photo">
+                    <div class="location-info">
+                        <h3>🔬 Научно-исследовательский центр</h3>
+                        <p><strong>Расположение</strong>г. Балашиха, Научный подземный цех</p>
+                        <p><strong>Площадь</strong>3 500 м²</p>
+                        <p><strong>Специализация</strong>Тестирование новейших технологий и усовершенствование воздушных фраз.</p>
+                        <p><strong>Персонал</strong>80 ведущих ученых и теоретиков</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Foffshoreview.eu%2Fwp-content%2Fuploads%2F2021%2F11%2Fblobid1636060620200.jpg&f=1&nofb=1&ipt=e43a670d7b0e9af70b538f2407525b2f2693bc28e04cc3a3573e81ab53ae6c72" alt="Сборочный цех" class="location-photo">
+                    <div class="location-info">
+                        <h3>⚙️ Сборочный цех «Свежесть»</h3>
+                        <p><strong>Расположение</strong>г Кишенёв, Индустриальный парк </p>
+                        <p><strong>Площадь</strong>8 000 м²</p>
+                        <p><strong>Специализация</strong>Сборка автоматизированных станций нагнетания хайпа.</p>
+                        <p><strong>Персонал</strong>120 квалифицированных сотрудников</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://i.pinimg.com/736x/d4/78/46/d4784666412a77eea052a8ec131767e2.jpg" alt="Сервисный центр" class="location-photo">
+                    <div class="location-info">
+                        <h3>🔧 Сервисный центр «Синяя Изолента»</h3>
+                        <p><strong>Расположение</strong>г. Ебеньград, Промзона "Солнышко"</p>
+                        <p><strong>Площадь</strong>2 000 м²</p>
+                        <p><strong>Специализация</strong>Экстренный ремонт утерянной репутации, замена изношенных аргументов.</p>
+                        <p><strong>Персонал</strong>45 топовых специалистов</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://i.pinimg.com/736x/18/08/73/18087390e0cb3b47c096c3cd55542fd0.jpg" alt="Логистический центр" class="location-photo">
+                    <div class="location-info">
+                        <h3>📦 Логистический центр</h3>
+                        <p><strong>Расположение</strong>г. Мытищи</p>
+                        <p><strong>Площадь</strong>12 000 м²</p>
+                        <p><strong>Специализация</strong>Сортировка и быстрая доставка ценных мыслей по регионам.</p>
+                        <p><strong>Персонал</strong>65 сотрудников склада</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <img src="https://i.pinimg.com/736x/f8/51/4d/f8514da150fef676a0aa6ac1682230b4.jpg" alt="Офис продаж" class="location-photo">
+                    <div class="location-info">
+                        <h3>Главный штаб "Воздухан Индастрис"</h3>
+                        <p><strong>Расположение</strong>г.Сургут, Бермудский треугольник</p>
+                        <p><strong>Площадь</strong>1 500 м²</p>
+                        <p><strong>Специализация</strong>Переговоры на высоком уровне, шоурум сертифицированных облаков.</p>
+                        <p><strong>Персонал</strong>45 креативных менеджеров</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="partners-wrapper">
+        <section id="partners">
+            <h2 class="section-title">Партнёры и издательство</h2>
+            <p class="partners-intro">
+                Наши стратегические союзники в мире большого воздуханства и невесомых инноваций
+            </p>
+            
+            <div class="partner-block">
+                <div class="partner-text">
+                    <h3>🎮 Издательство инди-студии ООО EGORNETWORK</h3>
+                    <p><strong>ООО EGORNETWORK</strong> — это наш главный финансируемый проект в сфере издательства воздуханских инди-проектов. Мы гордо поддерживаем разработчиков, которые создают контент для полнейшего воздуханства и продвижения в IT сфере.</p>
+                    <p>Наша компания уже 5 лет работает над проектами EGORNETWORK, которые не требуют никаких системных требований, кроме наличия электричества в доме. Мы издаем игры, которые весят 67 мегабайт.</p>
+                    <div class="highlight-box">
+                        "EGORNETWORK — это синоним инновационных решений."
+                    </div>
+                </div>
+                <div class="partner-image">
+                    <img src="https://exor4ik.github.io/website/images/logo_4k.png" alt="ООО EGORNETWORK">
+                </div>
+            </div>
+
+            <div class="future-partners">
+                <h3>🚀 Скоро здесь появятся новые партнёры!</h3>
+                <p>Мы постоянно расширяем нашу сеть воздушных альянсов. Следите за обновлениями, чтобы первыми узнать о новых стратегических союзниках Воздухан Индастрис.</p>
+            </div>
+        </section>
+    </div>
+
+    <section id="contact">
+        <h2 class="section-title">Контакты</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Свяжитесь с нами</h3>
+                <div class="contact-details-row">
+                    <div class="contact-detail">
+                        <span>📍</span>
+                        <div><strong>Адрес</strong>г. Москва, Промышленная улица, 11<br>Бизнес-центр «Воздухан», 5 этаж</div>
+                    </div>
+                    <div class="contact-detail">
+                        <span>📞</span>
+                        <div><strong>Телефон</strong>+7 (495) 789-28-08<br>+7 (800) 555-35-35</div>
+                    </div>
+                    <div class="contact-detail">
+                        <span>✉️</span>
+                        <div><strong>Email</strong>infovozduhan@gmail.com<br>salesvozduhan@gmail.com</div>
+                    </div>
+                    <div class="contact-detail">
+                        <span>🕐</span>
+                        <div><strong>Режим работы</strong>Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходной</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Воздухан Индастрис. Все права защищены.</p>
+        <p>ИНН: 6769148842 | ОГРН: 1467524215467 | Лицензия на продукт №42-ВОЗДУХ</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
