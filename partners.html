@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Партнёры и издательство — Воздухан Индастрис</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Дополнительные стили для страницы партнёров */
+        .partners-hero {
+            margin-top: 0;
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            background: linear-gradient(rgba(30, 60, 114, 0.9), rgba(42, 82, 152, 0.9)),
+            url('https://i.pinimg.com/736x/48/2e/07/482e07c7e52f94a9952a4959673d6590.jpg') center/cover;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        body.dark-mode .partners-hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9)),
+            url('https://i.pinimg.com/736x/48/2e/07/482e07c7e52f94a9952a4959673d6590.jpg') center/cover;
+        }
+        .partners-hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, var(--bg-body), transparent);
+        }
+        .partners-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .partners-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Партнёрские карточки — расширенный стиль */
+        .partner-card-full {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            margin-bottom: 3rem;
+        }
+        .partner-card-full:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .partner-card-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 2rem 2.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .partner-card-header .partner-badge {
+            font-size: 2.5rem;
+            background: rgba(255,255,255,0.15);
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .partner-card-header h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 0;
+        }
+        .partner-card-header span {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+        .partner-card-body {
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .partner-card-body .partner-description h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .partner-card-body .partner-description p {
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .partner-card-body .partner-image-box {
+            background: var(--bg-light);
+            border-radius: var(--radius);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        .partner-card-body .partner-image-box:hover {
+            transform: scale(1.02);
+        }
+        .partner-card-body .partner-image-box img {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .partner-quote {
+            background: rgba(255, 107, 107, 0.08);
+            border-left: 4px solid var(--accent);
+            padding: 1.2rem 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-top: 1rem;
+        }
+        body.dark-mode .partner-quote {
+            background: rgba(99, 179, 237, 0.1);
+        }
+        .partner-stats-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .partner-stat {
+            background: var(--bg-light);
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .partner-stat strong {
+            display: block;
+            color: var(--accent);
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+        .partner-stat span {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Секция будущих партнёров */
+        .future-partners-page {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--bg-light);
+            border-radius: var(--radius);
+            border: 2px dashed var(--border-color);
+            margin-top: 2rem;
+            transition: var(--transition);
+        }
+        .future-partners-page h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .future-partners-page p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .future-partners-page .rocket {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            .partners-hero h1 { font-size: 2.2rem; }
+            .partner-card-body { grid-template-columns: 1fr; }
+            .partner-card-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ДИСКЛЕЙМЕР -->
+    <div class="disclaimer-modal" id="disclaimer-modal">
+        <div class="disclaimer-content">
+            <button class="disclaimer-close" id="disclaimer-close-btn">&times;</button>
+            <div class="disclaimer-icon">⚠️</div>
+            <h3>Важное уведомление</h3>
+            <div class="disclaimer-text">
+                <p>Уважаемый посетитель!</p>
+                <p>Сайт <span class="highlight">"Воздухан Индастрис"</span> является сугубо шуточным проектом и создан исключительно в развлекательных целях.</p>
+                <p>Все совпадения с реальными компаниями, ФИО лиц и событиями случайны.</p>
+                <p>С уважением, разработчик сайта <span class="highlight">RLXFDNIGHT</span>.</p>
+            </div>
+            <div class="disclaimer-footer">
+                <button class="disclaimer-accept" id="disclaimer-accept">Понял, принимаю!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- НАВИГАЦИЯ -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">⚡ Воздухан Индастрис</a>
+            <div class="nav-controls">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html#about">О компании</a></li>
+                    <li><a href="index.html#services">Услуги</a></li>
+                    <li><a href="index.html#team">Команда</a></li>
+                    <li><a href="index.html#locations">Объекты</a></li>
+                    <li><a href="partners.html" class="active-link">Партнёры</a></li>
+                    <li><a href="index.html#contact">Контакты</a></li>
+                </ul>
+                <button class="theme-toggle-btn" id="theme-toggle-btn" title="Сменить тему">
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+                <button class="menu-toggle" id="mobile-menu-btn">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO ПАРТНЁРОВ -->
+    <section class="partners-hero">
+        <h1>🤝 Партнёры и издательство</h1>
+        <p>Наши стратегические союзники в мире большого воздуханства и невесомых инноваций</p>
+        <a href="index.html" class="back-btn">← Вернуться на главную</a>
+    </section>
+
+    <!-- ПАРТНЁРЫ -->
+    <section id="partners-section">
+        <h2 class="section-title">Наши партнёры</h2>
+
+        <!-- EGORNETWORK -->
+        <div class="partner-card-full">
+            <div class="partner-card-header">
+                <div class="partner-badge">🎮</div>
+                <div>
+                    <h3>Издательство инди-студии ООО EGORNETWORK</h3>
+                    <span>Стратегический партнёр с 2020 года</span>
+                </div>
+            </div>
+            <div class="partner-card-body">
+                <div class="partner-description">
+                    <h4>О партнёре</h4>
+                    <p><strong>ООО EGORNETWORK</strong> — это наш главный финансируемый проект в сфере издательства воздуханских инди-проектов. Мы гордо поддерживаем разработчиков, которые создают контент для полнейшего воздуханства и продвижения в IT сфере.</p>
+                    <p>Наша компания уже 5 лет работает над проектами EGORNETWORK, которые не требуют никаких системных требований, кроме наличия электричества в доме. Мы издаем игры, которые весят 67 мегабайт.</p>
+                    <div class="partner-quote">
+                        "EGORNETWORK — это синоним инновационных решений."
+                    </div>
+                    <div class="partner-stats-row">
+                        <div class="partner-stat">
+                            <strong>5 лет</strong>
+                            <span>Сотрудничества</span>
+                        </div>
+                        <div class="partner-stat">
+                            <strong>67 МБ</strong>
+                            <span>Макс. вес игры</span>
+                        </div>
+                        <div class="partner-stat">
+                            <strong>∞</strong>
+                            <span>Воздуха в проектах</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="partner-image-box">
+                    <img src="https://exor4ik.github.io/website/images/logo_4k.png" alt="EGORNETWORK Logo">
+                </div>
+            </div>
+        </div>
+
+        <!-- Будущие партнёры -->
+        <div class="future-partners-page">
+            <div class="rocket">🚀</div>
+            <h3>Скоро здесь появятся новые партнёры!</h3>
+            <p>Мы постоянно расширяем нашу сеть воздушных альянсов. Следите за обновлениями, чтобы первыми узнать о новых стратегических союзниках Воздухан Индастрис.</p>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ (краткие) -->
+    <section id="contact">
+        <h2 class="section-title">Контакты</h2>
+        <div class="contact-content">
+            <h3>Свяжитесь с нами</h3>
+            <div class="contact-details-row">
+                <div class="contact-detail">
+                    <span>📍</span>
+                    <div>
+                        <strong>Адрес</strong>
+                        г. Москва, Промышленная улица, 11<br>Бизнес-центр «Воздухан», 5 этаж
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <span>📞</span>
+                    <div>
+                        <strong>Телефон</strong>
+                        +7 (495) 789-28-08<br>+7 (800) 555-35-35
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <span>✉️</span>
+                    <div>
+                        <strong>Email</strong>
+                        infovozduhan@gmail.com<br>salesvozduhan@gmail.com
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <span>🕐</span>
+                    <div>
+                        <strong>Режим работы</strong>
+                        Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходной
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer>
+        <p>© 2026 Воздухан Индастрис. Все права защищены.</p>
+        <p>ИНН: 6769148842 | ОГРН: 1467524215467 | Лицензия на продукт №42-ВОЗДУХ</p>
+    </footer>
+
+    <!-- КНОПКИ -->
+    <button class="music-toggle-btn" id="music-toggle" title="Включить музыку">
+        <svg class="music-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+        <svg class="mute-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+    </button>
+
+    <button class="disclaimer-btn" id="disclaimer-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <span>Обязательно к ознакомлению</span>
+    </button>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <audio id="bg-music" loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="insight-sound">
+        <source src="assets/insight.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
